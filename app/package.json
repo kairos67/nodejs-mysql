@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "start": "node ./bin/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,12 +17,18 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/web-n/Nodejs/issues"
+    "url": "https://github.com/kairos67/nodejs-mysql/issues"
   },
-  "homepage": "https://github.com/web-n/Nodejs#readme",
+  "homepage": "https://github.com/kairos67/nodejs-mysql#readme",
   "dependencies": {
+    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "mysql": "^2.18.1",
     "sanitize-html": "^1.27.5"
-  }
+  },
+  "bin": {
+    "web2-nodejs": "www.js"
+  },
+  "devDependencies": {},
+  "keywords": []
 }
