@@ -25,17 +25,10 @@
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "mysql": "^2.18.1",
-<<<<<<< HEAD:package.json
-    "pg": "^8.7.3",
-    "sanitize-html": "^1.27.5"
-  }
-=======
     "sanitize-html": "^1.27.5"
   },
   "bin": {
     "web2-nodejs": "www.js"
   },
-  "devDependencies": {},
   "keywords": []
->>>>>>> 4cfc84fff1bc7fcf540dc151bd38137439e650de:app/package.json
 }
