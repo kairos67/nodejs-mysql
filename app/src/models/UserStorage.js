@@ -1,8 +1,9 @@
 "use strict";
 
 const fs = require("fs").promises;
+
 class UserStorage {
-    static #getUserInfo(data,id) {
+    static #getUserInfo(data, id) {
         const users = JSON.parse(data);
         const idx = users.id.indexOf(id);
         const userKeys = Object.keys(users); // ==>[id, pswd, name]
@@ -12,10 +13,12 @@ class UserStorage {
         }, {});
 
         return userInfo; //id 하나에 해당하는 user정보를 넘겨줌 예:kairos,1234,카이로스
-    }    
+    }
 
-    static getUsers(...fields) {
-        // const users = this.#users;
+    static #getUsers(data, isAll, fields) {
+        const users = JSON.parse(data);
+        if (isAll) return users;
+
         const newUsers = fields.reduce((newUsers, field) => {
             if (users.hasOwnProperty(field)) {
                 newUsers[field] = users[field];
@@ -25,25 +28,48 @@ class UserStorage {
         return newUsers;
     }
 
+    static getUsers(isAll, ...fields) {
+        // const users = this.#users;
+        return fs
+            .readFile("./src/database/users.json")
+            .then((data) => { //성공했을때
+                return this.#getUsers(data, isAll, fields); //가독성을 위해서 함수로처리
+            })
+            .catch(console.error); //실패했을때           
+    }
+
     static getUserInfo(id) {
         // const users = this.#users;
         return fs
             .readFile("./src/database/users.json")
             .then((data) => { //성공했을때
-            return this.#getUserInfo(data,id); //가독성을 위해서 함수로처리
-        })
-           .catch (console.error); //실패했을때           
+                return this.#getUserInfo(data, id); //가독성을 위해서 함수로처리
+            })
+            .catch(console.error); //실패했을때           
     }
- 
-    static save(userInfo) {
+
+    static async save(userInfo) {
         // const users = this.#users;
         // console.log("test" , users);
 
+        // users.id.push(userInfo.id);
+        // users.name.push(userInfo.name);
+        // users.pswd.push(userInfo.pswd);
+        // // console.log(users);
+        // return { success: true };
+        const users = await this.getUsers(true); //"id","pswd","name";
+        //  console.log(users);
+        //  console.log(userInfo);
+        if (users.id.includes(userInfo.id)) {
+            return "User id already in use";
+        }
         users.id.push(userInfo.id);
         users.name.push(userInfo.name);
         users.pswd.push(userInfo.pswd);
         // console.log(users);
+        fs.writeFile("./src/database/users.json", JSON.stringify(users));
         return { success: true };
+
     }
 }
 
