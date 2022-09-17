@@ -30,6 +30,5 @@
   "bin": {
     "web2-nodejs": "www.js"
   },
-  "devDependencies": {},
   "keywords": []
 }
