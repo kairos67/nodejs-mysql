@@ -1,5 +1,6 @@
 "use strict";
 
+const {response} = require("express");
 const UserStorage = require("./UserStorage");
 
 class User{
@@ -7,9 +8,9 @@ class User{
         this.body = body;
     }
 
-    login(){
+    async login(){
         const client = this.body;
-        const {id, pswd} = UserStorage.getUserInfo(client.id);
+        const {id, pswd} = await UserStorage.getUserInfo(client.id); //await 기다려줌 asinc에서만 사용
         
         if(id){
             if(id === client.id && pswd === client.pswd){
