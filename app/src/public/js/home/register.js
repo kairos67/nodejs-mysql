@@ -10,11 +10,13 @@ const id = document.querySelector("#id"),
 registerBtn.addEventListener("click", register);
 
 function register() {
+    if (!id.value) return alert("Please enter a valid identifier");    
+    if (pswd.value != confirmPswd.value)  return alert("wrong confirm password!");
+    
     const req = {
         id: id.value,
         name: name.value,
-        pswd: pswd.value,
-        confirmPswd: confirmPswd.value,
+        pswd: pswd.value,     
     };
     console.log(req);
     console.log(JSON.stringify(req));

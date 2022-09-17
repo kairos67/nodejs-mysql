@@ -6,7 +6,6 @@ const output = {
     home: (req, res) => {
         res.render("home/index");
     },
-
     login: (req, res) => {
         res.render("home/login");
     },
@@ -23,7 +22,14 @@ const process = {
         const response = user.login();
         // console.log(response);
         return res.json(response); //client에게 응답        
+        
     },
+    register: (req, res) => {
+        const user = new User(req.body);
+        const response = user.register();
+        // console.log(response);
+        return res.json(response); //client에게 응답   
+    }
 };
 
 module.exports = {

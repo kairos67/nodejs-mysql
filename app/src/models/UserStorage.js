@@ -29,6 +29,16 @@ class UserStorage{
 
         return userInfo; //id 하나에 해당하는 user정보를 넘겨줌 예:kairos,1234,카이로스
     }
+    static save(userInfo){
+        const users = this.#users;
+        // console.log("test" , users);
+        
+        users.id.push(userInfo.id);
+        users.name.push(userInfo.name);
+        users.pswd.push(userInfo.pswd);
+        // console.log(users);
+        return { success: true};
+    }
 }
 
 module.exports = UserStorage;
