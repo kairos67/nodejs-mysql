@@ -18,8 +18,8 @@ function register() {
         name: name.value,
         pswd: pswd.value,     
     };
-    console.log(req);
-    console.log(JSON.stringify(req));
+    // console.log(req);
+    // console.log(JSON.stringify(req));
     fetch("/register", { //여기는 FE이고,일반적으로 개발시는 BE가 만들어진뒤 개발함.
         method: "POST",
         headers: { "Content-Type": "application/json" },
